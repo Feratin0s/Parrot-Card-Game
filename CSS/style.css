@@ -84,6 +84,7 @@ body {
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 34px;
+    width: 0px;
     /*WIDTH É AJUSTADO PELO NÚMERO DE CARTAS NO JAVASCRIPT*/
 }
 
@@ -97,9 +98,37 @@ body {
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
+
+.pool .selecionada {
+    height: 146px;
+    width: 117px;
+    background: #FFFFFF;
+    border: 1px solid #99CEA8;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+/*Tamanho do papagaio que vai no meio da carta*/
 
 .pool .card .size {
     width: 100px;
     height: 100px;
+}
+
+.pool .card .back{
+    display: block;
+}
+
+.pool .card .back:hover{
+    cursor: pointer;
+}
+
+.pool .card .esconder{
+    display: none;
 }
