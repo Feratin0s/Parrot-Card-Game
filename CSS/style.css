@@ -1,0 +1,105 @@
+body {
+    background-color: #EEF9BF;
+}
+
+.titulo {
+    display: flex;
+    justify-content: center;
+}
+
+.titulo .letreiro380px {
+
+    /* Formatacao */
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 66px;
+    letter-spacing: -0.004em;
+
+    /*Letra*/
+
+    color: #75B79E;
+    margin-top: 40px;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 540px;
+}
+
+.titulo .letreiro {
+
+    /* Formatacao */
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 66px;
+    letter-spacing: -0.004em;
+
+    /*Letra*/
+
+    color: #75B79E;
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 540px;
+}
+
+/*Responsividade do LETREIRO */
+@media (max-width: 560px) {
+    .titulo .letreiro {
+        flex-direction: column;
+        width: auto;
+    }
+}
+
+@media (max-width: 380px) {
+    .titulo .letreiro380px {
+        flex-direction: column;
+        display: flex;
+        width: auto;
+    }
+
+    .titulo .letreiro {
+        display: none;
+    }
+}
+
+/*--------------------------------------------------------------------------------------------------------------------------*/
+
+/*Container das cartas, necessário fazer responsividade depois*/
+
+.corpo{
+    display: none;
+}
+.pool {
+    margin: 50px auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 34px;
+    /*WIDTH É AJUSTADO PELO NÚMERO DE CARTAS NO JAVASCRIPT*/
+}
+
+.pool .card {
+    height: 146px;
+    width: 117px;
+    background: #A7E9AF;
+    border: 1px solid #99CEA8;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.pool .card .size {
+    width: 100px;
+    height: 100px;
+}
