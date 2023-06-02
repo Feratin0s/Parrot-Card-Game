@@ -4,7 +4,6 @@ let Cartas = null;
 
 // Array das cartas
 let ArrayCards = [];
-console.log(ArrayCards);
 
 // Código das STRINGS
 
@@ -27,7 +26,6 @@ function Jogar() {
         iniciar.style.display = (`none`);
         const parrot = document.querySelector(`.corpo`);
         parrot.style.display = (`block`);
-        console.log(`PASSOU`);
         // Muda o nome da página
         document.title = "Parrot Card Game";
         //Aumenta a div pool
@@ -61,8 +59,7 @@ function NumCards() {
     console.log(ArrayCards);
     let addCard = document.querySelector(".pool");
     for (var i = 0; i < Cartas; i++) {
-        addCard.innerHTML += `<div class="card" onclick="flip(this)"><img class="size back" src="./Photos/back.png" alt=""><img class="size esconder" src="./Photos/${ArrayCards[i]}.gif" alt=""></div>`;
-        console.log(ArrayCards[i]);
+        addCard.innerHTML += `<div class="card" onclick="flip(this,${ArrayCards[i]}, ${i})"><img class="size back" src="./Photos/back.png" alt=""><img class="size esconder" src="./Photos/${ArrayCards[i]}.gif" alt=""></div>`;
     }
 }
 
@@ -99,19 +96,77 @@ function EmbaralhaArray(array) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
-    console.log(array);
     NumCards();
     return array;
 }
 
 // Função VIRAR CARTA
+// Comparador de cartas
+let cartaVirada = null;
+let cartasSelecionadas = [];
+let virar = null;
 
-function flip(card) {
-    const virar = card;
-    virar.classList.add('selecionada');
-    const mostrar = card.querySelector('.esconder');
-    mostrar.style.display = 'block';
-    const divEsconder = card.querySelector('.back');
-    divEsconder.style.display = 'none';
+function flip(card, valor, unica) {
+    virar = card;
+    console.log('Letra da carta e valor: ' + valor + ' ' + unica);
+
+    //Verifica o INDEX do for e o valor da carta, assim consegue diferenciar as cartas mesmo se elas forem iguais
+    if (cartaVirada === null) {
+        // Primeira carta clicada
+        cartaVirada = [card, valor, unica];
+        // Virar carta
+        console.log(virar);
+        virar.classList.add('selecionada');
+        const mostrar = card.querySelector('.esconder');
+        mostrar.style.display = 'block';
+        const divEsconder = card.querySelector('.back');
+        divEsconder.style.display = 'none';
+    } else {
+        // Segunda carta clicada
+        if (cartaVirada[1] === valor && cartaVirada[2] !== unica) {
+            // As cartas são iguais
+            console.log("As cartas são iguais!");
+            console.log(virar);
+            virar.classList.add('selecionada');
+            const mostrar = card.querySelector('.esconder');
+            mostrar.style.display = 'block';
+            const divEsconder = card.querySelector('.back');
+            divEsconder.style.display = 'none';
+        } else {
+
+            //Mostra a carta
+            console.log("As cartas são diferentes!");
+            console.log(virar);
+            virar.classList.add('selecionada');
+            const mostrar = card.querySelector('.esconder');
+            mostrar.style.display = 'block';
+            const divEsconder = card.querySelector('.back');
+            divEsconder.style.display = 'none';
+
+            //Espera um pouco
+            const SecondCard = cartaVirada[0];
+            setTimeout(function () {
+                
+                // As cartas são diferentes
+                virar.classList.remove('selecionada');
+                const mostrar = card.querySelector('.esconder');
+                mostrar.style.display = 'none';
+                const divEsconder = card.querySelector('.back');
+                divEsconder.style.display = 'block';
+
+                // Segunda carta
+                console.log(SecondCard);
+                SecondCard.classList.remove('selecionada');
+                const show = SecondCard.querySelector('.esconder');
+                show.style.display = 'none';
+                const Hide = SecondCard.querySelector('.back');
+                Hide.style.display = 'block';
+            }, 1000);
+        }
+        cartaVirada = null; // Reinicia a variável para a próxima jogada
+    }
+
+    cartasSelecionadas.push([valor, unica]);
 }
+
 
