@@ -182,3 +182,17 @@ ion-icon:hover {
     left: 20px;
     bottom: 20px;
 }
+
+/*Contador de tentativas */
+.textotries{
+    position: fixed;
+    bottom: 37px;
+    right: 20px;
+    font-size: 30px;
+    display: flex;
+}
+
+.textotries .tentativas{
+    font-size: 30px;
+    color: #28572c;
+}

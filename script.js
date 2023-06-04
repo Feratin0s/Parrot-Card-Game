@@ -19,15 +19,27 @@ var F = "F";
 var G = "G";
 var H = "H";
 
+//Variavel pra corrigir bug
+let JogarUmaVez = 1;
+
+//Ao apertar o botao
+function play(){
+    if(JogarUmaVez === 0){
+        Jogar();
+    } else {
+        return;
+    }
+}
+
 // Começo de código, ao clicar no botão Play!
 setTimeout(function () {
     Jogar();
 }, 1000);
 
-
+//Iniciar tudo
 function Jogar() {
     Cartas = parseInt(prompt(`Quantas cartas você quer? Digite um número par entre 4 e 14`));
-
+    JogarUmaVez = 1;
     if (typeof Cartas === 'number' && Cartas % 2 === 0 && Cartas >= 4 && Cartas <= 14) {
         const iniciar = document.querySelector(`.corpostart`);
         iniciar.style.display = (`none`);
@@ -37,8 +49,8 @@ function Jogar() {
         document.title = "Parrot Card Game";
         //Aumenta a div pool
         ContabilizadorCartas();
-        VerificaLargura();
-        setTimeout(iniciarTimer, 2000);
+        VerificaLargura();14
+        setTimeout(iniciarTimer, 500);
     }
     else {
         alert(`Digite um número par válido entre 4 e 14`);
@@ -49,7 +61,7 @@ function Jogar() {
 
 
 //Aumenta o tamanho da div POOL para responsividade 
-// ----------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------
 // Função para verificar o tamanho da TELA
 function VerificaLargura() {
     var tamanhotela = window.innerWidth;
@@ -72,7 +84,7 @@ function VerificaLargura() {
     }
 }
 
-// Função para telas maiores que 1157 pixeis de largura
+// Função para telas maiores que 1157 pixels de largura
 function aumentarDiv() { //Funciona bem em monitores grandes divido por 2
     console.log(`Computador`);
     var pool = document.querySelector(`.pool`);
@@ -83,7 +95,7 @@ function aumentarDiv() { //Funciona bem em monitores grandes divido por 2
     return pool;
 }
 
-// Função para telas menores que 1157 e maiores que 840 pixeis de largura
+// Função para telas menores que 1157 e maiores que 840 pixels de largura
 function aumentarMedio() { //Funciona bem em monitores menores divido por 3
     console.log(`Medio`);
     var pool = document.querySelector(`.pool`);
@@ -95,7 +107,7 @@ function aumentarMedio() { //Funciona bem em monitores menores divido por 3
     return pool;
 }
 
-// Função para telas menores que 840 e maiores que 660 pixeis de largura
+// Função para telas menores que 840 e maiores que 660 pixels de largura
 function aumentarMenor() { //Funciona bem em monitores menores divido por 4
     console.log('Menor');
     var pool = document.querySelector(`.pool`);
@@ -107,7 +119,7 @@ function aumentarMenor() { //Funciona bem em monitores menores divido por 4
     return pool;
 }
 
-// Função para telas menores que 660 e maiores que 500 pixeis de largura
+// Função para telas menores que 660 e maiores que 500 pixels de largura
 function aumentarPequeno() { //Funciona bem em monitores menores divido por 5
     console.log('Pequeno');
     var pool = document.querySelector(`.pool`);
@@ -119,8 +131,8 @@ function aumentarPequeno() { //Funciona bem em monitores menores divido por 5
     return pool;
 }
 
-// Função para telas menores que 500 e maiores que 0 pixeis de largura
-function aumentarCel() { //Funciona bem em monitores menores divido por 5
+// Função para telas menores que 500 e maiores que 0 pixels de largura
+function aumentarCel() { //Funciona bem em monitores menores divido por 14
     console.log('Cel');
     var pool = document.querySelector(`.pool`);
     pool.style.gap = '20px';
@@ -131,7 +143,7 @@ function aumentarCel() { //Funciona bem em monitores menores divido por 5
     return pool;
 }
 
-// ----------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------
 
 //For para adicionar cartas
 //Adiciona div responsável pela carta
@@ -139,11 +151,11 @@ function NumCards() {
     console.log(ArrayCards);
     let addCard = document.querySelector(".pool");
     for (var i = 0; i < Cartas; i++) {
-        addCard.innerHTML += `<div class="card" onclick="flip(this,${ArrayCards[i]}, ${i})"><img class="size back" src="./Photos/back.png" alt=""><img class="size esconder" src="./Photos/${ArrayCards[i]}.gif" alt=""></div>`;
+        addCard.innerHTML += `<div class="card" onclick="flip(this,${ArrayCards[i]}, ${i})"><img data-test="face-down-image" class="size back" src="./Photos/back.png" alt=""><img class="size esconder" data-test="face-up-image" src="./Photos/${ArrayCards[i]}.gif" alt=""></div>`;
     }
 }
 
-// ---------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------
 
 function ContabilizadorCartas() {
     if (Cartas === 16) {
@@ -180,7 +192,8 @@ function EmbaralhaArray(array) {
     NumCards();
     return array;
 }
-//-----------------------------------------------------------------------------------------------------------------
+
+//-------------------------------------------------------------------------------------------------------------------------
 // Função verificador de cartas repetidas
 function VerificaCarta(valor) {
     if (!puxa.includes(valor)) {
@@ -221,6 +234,7 @@ function flip(card, valor, unica) {
     }
 
     // Vira a carta selecionada
+    Counter();
     card.classList.add('selecionada');
     const mostrar = card.querySelector('.esconder');
     mostrar.style.display = 'block';
@@ -276,7 +290,7 @@ function Ganhou() {
     setTimeout(function () {
         console.log(puxa.length);
         if (puxa.length === Cartas) {
-            alert(`Voce ganhou`);
+            alert(`Você ganhou em ${ContadorTries} jogadas! A duração do jogo foi de ${tempoFormatado} segundos!`);
             Reiniciar();
             pararTimer();
             iniciarPiscar();
@@ -289,12 +303,12 @@ function Ganhou() {
 
 function Reiniciar() {
     const Reset = prompt('Gostaria de reiniciar o jogo?')
-    if (Reset === 'Sim') {
+    if (Reset === 'sim') {
         location.reload();
-    } else if (Reset === 'Não') {
+    } else if (Reset === 'não') {
         // Não faz nada
     } else {
-        alert('Digite uma resposta válida "Sim ou Não"');
+        alert('Digite uma resposta válida "sim ou não"');
         Reiniciar();
     }
 
@@ -316,14 +330,14 @@ function pararTimer() {
     clearInterval(intervaloTimer);
     intervaloTimer = null;
 }
-
+var tempoFormatado;
 function atualizarTimer() {
     segundos++;
     if (segundos === 60) {
         segundos = 0;
         minutos++;
     }
-    var tempoFormatado = formatarTempo(minutos, segundos);
+    tempoFormatado = formatarTempo(minutos, segundos);
     document.getElementById("timer").textContent = tempoFormatado;
 }
 
@@ -336,10 +350,10 @@ function formatarTempo(minutos, segundos) {
 //-------------------------------------------------------------------------------------------------------------------------
 
 var intervaloPiscar;
-var contador = document.getElementById('.contador');
 
 // Faz piscar
 function piscarContador() {
+    var contador = document.getElementById('contador');
     if (contador.style.display === "none") {
         contador.style.display = "block";
     } else {
@@ -354,10 +368,20 @@ function iniciarPiscar() {
 
 function ContadorMobile() {
     var Mobile = document.querySelector('.contadorcel');
-    Mobile.innerHTML += '<div class="contador" id="contador"> <div class="timer cel"><span id="timer">00:00</span></div></div>'
+    Mobile.innerHTML += '<div class="contador" data-test="timer" id="contador"><div class="timer cel"><span id="timer">00:00</span></div></div>'
 }
 
 function ContadorPC() {
     var PC = document.querySelector('.containercontador');
-    PC.innerHTML += '<div class="contador" id="contador"> <div class="timer pc"><span id="timer">00:00</span></div></div>'
+    PC.innerHTML += '<div class="contador" data-test="timer" id="contador"> <div class="timer pc"><span id="timer">00:00</span></div></div>'
+}
+
+//-------------------------------------------------------------------------------------------------------------------------
+
+let ContadorTries = 0;
+
+function Counter() {
+  var Counter = parseInt(ContadorTries); // Converte para número
+  ContadorTries = Counter + 1;
+  document.getElementById("counter").textContent = "Tries: " + ContadorTries;
 }

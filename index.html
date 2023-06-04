@@ -31,7 +31,7 @@
     <div class="corpostart">
         <img class="logobrazil" src="./Photos/Flag_of_Brazil.svg.png" alt="">
         <!-- Tela inicial -->
-        <div class="iniciar"><img src="./Photos/brain.png" alt=""><button onclick="Jogar()">Play!</button>
+        <div class="iniciar"><img src="./Photos/brain.png" alt=""><button onclick="play()">Play!</button>
             <a>by: Arthur Ferraz</a>
         </div>
     </div>
@@ -52,12 +52,14 @@
             <!-- Contador CELL -->
             <div class="contadorcel">
             </div>
-        <div class="pool">
+        <div class="pool" data-test="card">
             <!-- O JAVASCRIPT ADICIONA CARTAS AUTOMATICAMENTE -->
         </div>
         <!-- Contador PC -->
         <div class="containercontador">
         </div>
+        <!-- Contador de TENTATIVAS -->
+        <div class="textotries"><div class="tentativas" id="counter">Tries: 0</div></div>
     </div>
     <!-- SCRIPTS -->
     <script src="script.js"></script>
