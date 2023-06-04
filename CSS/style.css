@@ -57,6 +57,10 @@ body {
         flex-direction: column;
         width: auto;
     }
+
+    .pool {
+        margin: 20px auto;
+    }
 }
 
 @media (max-width: 380px) {
@@ -69,15 +73,36 @@ body {
     .titulo .letreiro {
         display: none;
     }
+
+    .pool {
+        margin: 20px auto;
+    }
 }
 
 /*--------------------------------------------------------------------------------------------------------------------------*/
 
 /*Container das cartas, necessário fazer responsividade depois*/
 
-.corpo{
+.corpo {
     display: none;
 }
+
+ion-icon {
+    position: fixed;
+    font-size: 40px;
+    top: 20px;
+    right: 30px;
+    background-color: #A7E9AF;
+    border-radius: 100%;
+    border: solid black 3px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+ion-icon:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
+}
+
 .pool {
     margin: 50px auto;
     display: flex;
@@ -91,7 +116,7 @@ body {
 .pool .card {
     height: 146px;
     width: 117px;
-    background: #A7E9AF;
+    background-color: #A7E9AF;
     border: 1px solid #99CEA8;
     border-radius: 5px;
     display: flex;
@@ -102,16 +127,7 @@ body {
 }
 
 .pool .selecionada {
-    height: 146px;
-    width: 117px;
-    background: #FFFFFF;
-    border: 1px solid #99CEA8;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background-color: #FFFFFF;
 }
 
 /*Tamanho do papagaio que vai no meio da carta*/
@@ -121,14 +137,48 @@ body {
     height: 100px;
 }
 
-.pool .card .back{
+.pool .card .back {
     display: block;
 }
 
-.pool .card .back:hover{
+.pool .card .back:hover {
     cursor: pointer;
 }
 
-.pool .card .esconder{
+.pool .card .esconder {
     display: none;
+}
+
+/* TIMER */
+
+.containercontador {
+    height: 70px;
+}
+
+.contador .timer {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    line-height: 66px;
+    letter-spacing: -0.004em;
+    color: #75B79E;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contador .pc {
+    font-size: 120px;
+    margin-top: 80px;
+}
+
+.contador .cel {
+    font-size: 30px;
+    color: #28572c;
+}
+
+.contadorcel{
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
 }
