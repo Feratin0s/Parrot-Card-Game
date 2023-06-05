@@ -53,7 +53,6 @@ function Jogar() {
         setTimeout(iniciarTimer, 500);
     }
     else {
-        alert(`Digite um número par válido entre 4 e 14`);
         console.log(`Repetiu`);
         Jogar();
     }
@@ -151,7 +150,7 @@ function NumCards() {
     console.log(ArrayCards);
     let addCard = document.querySelector(".pool");
     for (var i = 0; i < Cartas; i++) {
-        addCard.innerHTML += `<div class="card" onclick="flip(this,${ArrayCards[i]}, ${i})"><img data-test="face-down-image" class="size back" src="./Photos/back.png" alt=""><img class="size esconder" data-test="face-up-image" src="./Photos/${ArrayCards[i]}.gif" alt=""></div>`;
+        addCard.innerHTML += `<div class="card" onclick="flip(this,${ArrayCards[i]}, ${i})"><div class="front-face face"><img data-test="face-down-image" class="size" src="./Photos/back.png" alt=""></div><div class="back-face face"><img class="size" data-test="face-up-image" src="./Photos/${ArrayCards[i]}.gif" alt=""></div></div>`;
     }
 }
 
@@ -236,10 +235,8 @@ function flip(card, valor, unica) {
     // Vira a carta selecionada
     Counter();
     card.classList.add('selecionada');
-    const mostrar = card.querySelector('.esconder');
-    mostrar.style.display = 'block';
-    const divEsconder = card.querySelector('.back');
-    divEsconder.style.display = 'none';
+    const mostrar = card.querySelector('.back-face');
+    mostrar.style.transform = 'rotateY(0deg)';
 
     // Armazena a carta selecionada
     cartasSelecionadas.push([valor, unica]);
@@ -259,6 +256,7 @@ function flip(card, valor, unica) {
         } else {
             // As cartas são diferentes, aguarda um pouco e vira as cartas novamente
             setTimeout(function () {
+                console.log(`VIRAR`);
                 const firstCard = cartasSelecionadas[0][1];
                 const secondCard = cartasSelecionadas[1][1];
 
@@ -266,16 +264,18 @@ function flip(card, valor, unica) {
                 const secondCardElement = document.querySelector(`.card:nth-child(${secondCard + 1})`);
 
                 firstCardElement.classList.remove('selecionada');
-                const showFirst = firstCardElement.querySelector('.esconder');
-                showFirst.style.display = 'none';
-                const hideFirst = firstCardElement.querySelector('.back');
-                hideFirst.style.display = 'block';
-
+                const showFirst = firstCardElement.querySelector('.front-face');
+                showFirst.style.transform = 'rotateY(0deg)';
+        
+                const HideFirst = firstCardElement.querySelector('.back-face');
+                HideFirst.style.transform = 'rotateY(180deg)';
+        
                 secondCardElement.classList.remove('selecionada');
-                const showSecond = secondCardElement.querySelector('.esconder');
-                showSecond.style.display = 'none';
-                const hideSecond = secondCardElement.querySelector('.back');
-                hideSecond.style.display = 'block';
+                const showSecond = secondCardElement.querySelector('.front-face');
+                showSecond.style.transform = 'rotateY(0deg)';
+        
+                const HideSecond = secondCardElement.querySelector('.back-face');
+                HideSecond.style.transform = 'rotateY(180deg)';
 
                 cartasSelecionadas = []; // Limpa as cartas selecionadas
             }, 1000);

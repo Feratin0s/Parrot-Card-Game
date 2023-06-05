@@ -116,19 +116,31 @@ ion-icon:hover {
 .pool .card {
     height: 146px;
     width: 117px;
+    position: relative;
+    border-radius: 10px;
     background-color: #A7E9AF;
-    border: 1px solid #99CEA8;
-    border-radius: 5px;
+}
+
+.pool .card .face {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: all .5s;
+    transform-style: preserve-3d;
 }
 
-.pool .selecionada {
+.back-face {
+    transform: rotateY(180deg);
     background-color: #FFFFFF;
 }
+
 
 /*Tamanho do papagaio que vai no meio da carta*/
 
@@ -137,17 +149,8 @@ ion-icon:hover {
     height: 100px;
 }
 
-.pool .card .back {
-    display: block;
-}
 
-.pool .card .back:hover {
-    cursor: pointer;
-}
 
-.pool .card .esconder {
-    display: none;
-}
 
 /* TIMER */
 
@@ -177,14 +180,14 @@ ion-icon:hover {
     color: #28572c;
 }
 
-.contadorcel{
+.contadorcel {
     position: fixed;
     left: 20px;
     bottom: 20px;
 }
 
 /*Contador de tentativas */
-.textotries{
+.textotries {
     position: fixed;
     bottom: 37px;
     right: 20px;
@@ -192,7 +195,7 @@ ion-icon:hover {
     display: flex;
 }
 
-.textotries .tentativas{
+.textotries .tentativas {
     font-size: 30px;
     color: #28572c;
 }
